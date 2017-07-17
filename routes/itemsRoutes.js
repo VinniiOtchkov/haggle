@@ -11,7 +11,7 @@ router.get('/:location_id', function(req, res, next) {
     });
 });
 /* GET Single Item. */
-router.get('/:location_id/:id', function(req, res, next) {
+router.get('/:id', function(req, res, next) {
   knex('')
 
     .then(function(items) {
@@ -19,8 +19,16 @@ router.get('/:location_id/:id', function(req, res, next) {
     })
 })
 
+/* Get Add Item page */
+router.get('/newItem', function(req, res, next) {
+  var items = {};
+  res.render('', {
+    items
+  })
+})
+
 /* Remove Item. */
-router.get('/:location_id/:id/remove', function(req, res, next) {
+router.get('/:id/remove', function(req, res, next) {
   knex('')
 
     .then(function(items) {
@@ -29,7 +37,7 @@ router.get('/:location_id/:id/remove', function(req, res, next) {
 })
 
 /* Update Single Item. */
-router.post('/:location_id/:id/update', function(req, res, next) {
+router.post('/:id/update', function(req, res, next) {
   knex('')
     .update()
     .then(function(items) {
