@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var knex = require('../db/knex');
 
+
 /* GET USER page. */
 router.get('/:id', function(req, res, next) {
   knex('')
