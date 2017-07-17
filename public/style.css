@@ -1,0 +1,39 @@
+body{
+  margin:0px auto;
+  height: 100vh;
+  width:100vw;
+  background-color: #522B47;
+  background-size: cover;
+}
+
+.searchForm{
+  padding-top: 25%;
+  color: white;
+  width: 75%;
+  padding-left: 20%;
+}
+
+a:hover{
+  opactiy:0.9;
+  background-color: #8DAA9D;
+}
+
+
+#title{
+  color: white;
+}
+
+#title:hover{
+  opacity: 0.8;
+}
+
+#navStuff{
+  color: white;
+}
+
+.footer {
+    position: fixed;
+    height: 5%;
+    bottom: 0;
+    width: 100%;
+}
