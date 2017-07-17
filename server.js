@@ -7,7 +7,8 @@ var logger = require('morgan');
 var knex = require('./db/knex');
 
 var index = require('./routes/indexRoutes');
-var todos = require('./routes/todosRoutes');
+var items = require('./routes/itemsRoutes');
+var user = require('./routes/userRoutes');
 
 var app = express();
 
@@ -17,11 +18,15 @@ app.set('view engine', 'ejs');
 app.use(logger('dev'));
 app.use(cors());
 app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({
+  extended: false
+}));
 
 app.use('/', index);
-app.use('/todos', todos);
+app.use('/items', items);
+app.use('/user', user);
+
 
 app.listen(port, function() {
-console.log("listening on port: ", port);
+  console.log("listening on port: ", port);
 })
