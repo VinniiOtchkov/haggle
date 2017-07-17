@@ -18,6 +18,7 @@ app.set('view engine', 'ejs');
 
 app.use(logger('dev'));
 app.use(cors());
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(__dirname + '/public'));
@@ -29,5 +30,5 @@ app.use('/user', user);
 
 
 app.listen(port, function() {
-console.log("listening on port: ", port);
+  console.log("listening on port: ", port);
 })
