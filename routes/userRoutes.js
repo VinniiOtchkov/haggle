@@ -4,10 +4,28 @@ var knex = require('../db/knex');
 
 
 /* Get new User Page. */
-
 router.get('/new', function(req, res, next) {
   // var users = {};
   res.render('user_signup');
+});
+
+/* GET USER page. */
+router.get('/:id', function(req, res, next) {
+  Promise.all([knex('selling_by_id')
+    .join('users', 'users.id', 'selling_by_id.seller_id')
+    .select('seller_name', 'img_url', 'item_name', 'haggle_price', 'buyer_name', 'status')
+    .where('seller_id', req.params.id),
+    knex('buyer_by_id')
+    .join('users', 'users.id', 'buyer_by_id.buyer_id')
+    .select('img_url', 'item_name', 'haggle_price', 'seller_name', 'city', 'status')
+    .where('buyer_id', req.params.id)
+  ]).then(function(users) {
+    console.log('users', users);
+    res.render('user', {
+      selling: users[0],
+      buying: users[1]
+    });
+  });
 });
 
 /* Deletes User. */
@@ -24,28 +42,15 @@ router.get('/:id/remove', function(req, res, next) {
 router.post('/new', function(req, res, next) {
   knex('users')
     .insert({
-        name: '${req.body.name}',
-       email: '${req.body.email}',
-       location_id: '${req.body.location_id}'
-     })
-    .then(function(req,res) {
-res.redirect('/');
+      name: '${req.body.name}',
+      email: '${req.body.email}',
+      location_id: '${req.body.location_id}'
+    })
+    .then(function(req, res) {
+      res.redirect('/');
     });
 });
 
-
-/* GET USER page. */
-// router.get('/:id', function(req, res, next) {
-//   knex('user')
-//
-//     .where('id', req.params.id)
-//     .then(function(users) {
-//       res.render('user', {
-//         user: user.rows
-//
-//       });
-//     });
-// });
 
 /* Updates User */
 router.post('/:id/update', function(req, res) {
