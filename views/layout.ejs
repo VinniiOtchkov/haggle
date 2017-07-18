@@ -93,9 +93,9 @@ $.fn.extend({
 
   });
 
-  $('body').css('display', 'none');
+  $('.wrapper').css('display', 'none');
 
-  $('body').fadeIn(1000);
+  $('.wrapper').fadeIn(700);
 
 
   $('.link').click(function() {
@@ -103,6 +103,7 @@ $.fn.extend({
   event.preventDefault();
 
   newLocation = this.href;
+  $('.wrapper').fadeOut(700);
 
 
   });

@@ -49,6 +49,7 @@ router.get('/:id/remove', function(req, res, next) {
 
 /* Creates New User. */
 router.post('/new', function(req, res, next) {
+  console.log(req.body);
   knex('users')
     .insert(req.body)
     .then(function(users) {
