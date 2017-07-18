@@ -4,6 +4,7 @@ exports.up = function(knex, Promise) {
       table.increments();
       table.string('name');
       table.string('email').notNullable();
+      table.string('password').notNullable();
       table.integer('location_id').references('id').inTable('locations');
   })
 };
