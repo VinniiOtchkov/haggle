@@ -149,3 +149,9 @@ font-weight: 300;
   opacity: 0.5;
   font-family: 'Work Sans', sans-serif;
 }
+
+.userInfo {
+  background-color: white;
+  width: 200px;
+  float: left;
+}
