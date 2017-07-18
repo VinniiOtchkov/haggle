@@ -143,8 +143,17 @@ font-weight: 300;
 
 }
 
-.userInfo {
+table {
   background-color: white;
-  width: 200px;
-  float: left;
+}
+
+.title {
+  background-color: white;
+  font-size: 32px;
+  font-family: serif;
+}
+
+.userContainer {
+  margin: 0px auto;
+  text-align: center;
 }
