@@ -53,6 +53,14 @@ img {
   color: white;
   width: 75%;
   padding-left: 25%;
+
+}
+
+.newUserForm{
+  color: white;
+  width: 75%;
+  padding-left: 25%;
+  margin-top: 10%;
 }
 
 
@@ -140,5 +148,4 @@ font-weight: 300;
   background-image: url('/images/forest.jpg');
   opacity: 0.5;
   font-family: 'Work Sans', sans-serif;
-
 }
