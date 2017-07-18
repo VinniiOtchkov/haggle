@@ -1,7 +1,7 @@
 --List all active haggles by seller id
 drop view if exists selling_by_id;
 create view selling_by_id as
-select u.name as seller_name, u.id as seller_id, u2.name as buyer_name, u2.id as buyer_id, i.name as item_name, i.description, i.initial_price, i.img_url, h.haggle_price, s.status from haggles h join users u on h.seller_id = u.id left join users u2 on h.buyer_id = u2.id join items i on h.item_id = i.id join statuses s on h.status_id = s.id;
+select u.name as seller_name, u.id as seller_id, u2.name as buyer_name, u2.id as buyer_id, i.name as item_name, i.description, i.initial_price, i.img_url, h.haggle_price, s.status from haggles h left join users u on h.seller_id = u.id left join users u2 on h.buyer_id = u2.id join items i on h.item_id = i.id join statuses s on h.status_id = s.id;
 
 --see all active haggles based on seller_id
 --select s.seller_name, s.buyer_name, s.item_name, s.description, s.initial_price, s.haggle_price, s.status from selling_by_id s join users u on u.id = s.seller_id where s.seller_id = 2;
