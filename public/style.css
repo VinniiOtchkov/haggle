@@ -46,6 +46,10 @@ body {
   background-size: cover;
 }
 
+select{
+  color:black;
+}
+
 .container-fluid {
   background-image: url('/images/forest.jpg');
   opacity: 0.5;
