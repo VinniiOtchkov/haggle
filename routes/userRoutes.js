@@ -5,7 +5,7 @@ var knex = require('../db/knex');
 
 /* Get new User Page. */
 router.get('/new', function(req, res, next) {
-  // var users = {};
+  var users = {};
   res.render('user_signup');
 });
 
@@ -39,10 +39,11 @@ router.get('/:id/remove', function(req, res, next) {
 
 /* Creates New User. */
 router.post('/new', function(req, res, next) {
+  console.log(req.body);
   knex('users')
     .insert(req.body)
     .then(function(req, res) {
-      res.redirect('/');
+      res.redirect('/:id');
     });
 });
 
