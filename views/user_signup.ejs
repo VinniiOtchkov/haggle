@@ -27,13 +27,16 @@
 
 <div class="form-group">
   <label class="control-label" for="inputDefault">Region</label>
-  <input type="text" name ="location_id" class="form-control" id="inputDefault">
+  <select>
+    <% for(var i = 0; i < states.length; i++) { %>
+  <option value="<%=states[i].id%>" name="<%=states[i].id%>" placeholder="<%=states[i].abreviation%>"><%=states[i].abreviation%></option>
+  <% } %>
+</select>
 </div>
 
 <button class="btn btn-primary btn-lg" type="submit" id="haggleButton" style="background-color:#BD321F;">
   <div id="haggleText">Submit User</div>
 </button>
-
 </form>
 
 </div>

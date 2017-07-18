@@ -6,7 +6,13 @@ var knex = require('../db/knex');
 /* Get new User Page. */
 router.get('/new', function(req, res, next) {
   var users = {};
-  res.render('user_signup');
+  knex('states')
+    .select()
+    .then(function(states) {
+      res.render('user_signup', {
+        states
+      });
+    })
 });
 
 /* GET USER page. */
@@ -18,11 +24,15 @@ router.get('/:id', function(req, res, next) {
     knex('buyer_by_id')
     .join('users', 'users.id', 'buyer_by_id.buyer_id')
     .select('img_url', 'item_name', 'haggle_price', 'seller_name', 'city', 'status')
-    .where('buyer_id', req.params.id)
+    .where('buyer_id', req.params.id),
+    knex('users')
+    .select()
+    .where('id', req.params.id)
   ]).then(function(users) {
     res.render('user', {
       selling: users[0],
-      buying: users[1]
+      buying: users[1],
+      users: users[2][0]
     });
   });
 });
@@ -42,8 +52,10 @@ router.post('/new', function(req, res, next) {
   console.log(req.body);
   knex('users')
     .insert(req.body)
-    .then(function(req, res) {
-      res.redirect('/:id');
+    .then(function(users) {
+      res.render('user', {
+        users
+      });
     });
 });
 
