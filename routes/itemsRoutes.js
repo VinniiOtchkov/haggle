@@ -22,7 +22,7 @@ router.get('/:id', function(req, res, next) {
 /* Get Add Item page */
 router.get('/newItem', function(req, res, next) {
   var items = {};
-  res.render('', {
+  res.render('addItem', {
     items
   })
 })

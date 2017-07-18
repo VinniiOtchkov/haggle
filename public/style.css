@@ -17,6 +17,26 @@ input[type=text]:focus, textarea:focus {
 
 }
 
+
+input[type=password], textarea {
+  -webkit-transition: all 0.30s ease-in-out;
+  -moz-transition: all 0.30s ease-in-out;
+  -ms-transition: all 0.30s ease-in-out;
+  -o-transition: all 0.30s ease-in-out;
+  outline: none;
+  padding: 3px 0px 3px 3px;
+  margin: 5px 1px 3px 0px;
+  border: 1px solid #DDDDDD;
+}
+
+input[type=password]:focus, textarea:focus {
+  box-shadow: 0 0 5px #D64550;
+  padding: 3px 0px 3px 3px;
+  margin: 5px 1px 3px 0px;
+  border: 1px solid #EA9E8D;
+
+}
+
 body {
   padding: 0;
   margin: 0;
@@ -53,6 +73,14 @@ img {
   color: white;
   width: 75%;
   padding-left: 25%;
+
+}
+
+.newForm{
+  color: white;
+  width: 75%;
+  padding-left: 25%;
+  margin-top: 10%;
 }
 
 
@@ -140,5 +168,21 @@ font-weight: 300;
   background-image: url('/images/forest.jpg');
   opacity: 0.5;
   font-family: 'Work Sans', sans-serif;
+}
 
+table {
+  background-color: white;
+}
+
+.title {
+  background-color: white;
+  font-size: 32px;
+  font-family: serif;
+  text-align: center;
+}
+
+.userContainer {
+  margin: 0px auto;
+  width: 50%;
+  margin-top: 150px;
 }

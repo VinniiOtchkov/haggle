@@ -35,6 +35,102 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
+-- Name: haggles; Type: TABLE; Schema: public; Owner: tom
+--
+
+CREATE TABLE haggles (
+    id integer NOT NULL,
+    seller_id integer,
+    buyer_id integer,
+    haggle_price integer,
+    item_id integer,
+    status_id integer
+);
+
+
+ALTER TABLE haggles OWNER TO tom;
+
+--
+-- Name: items; Type: TABLE; Schema: public; Owner: tom
+--
+
+CREATE TABLE items (
+    id integer NOT NULL,
+    name character varying(255) NOT NULL,
+    initial_price integer NOT NULL,
+    description character varying(255) NOT NULL,
+    img_url character varying(255)
+);
+
+
+ALTER TABLE items OWNER TO tom;
+
+--
+-- Name: locations; Type: TABLE; Schema: public; Owner: tom
+--
+
+CREATE TABLE locations (
+    id integer NOT NULL,
+    city character varying(255),
+    state_id integer
+);
+
+
+ALTER TABLE locations OWNER TO tom;
+
+--
+-- Name: statuses; Type: TABLE; Schema: public; Owner: tom
+--
+
+CREATE TABLE statuses (
+    id integer NOT NULL,
+    status character varying(255)
+);
+
+
+ALTER TABLE statuses OWNER TO tom;
+
+--
+-- Name: users; Type: TABLE; Schema: public; Owner: tom
+--
+
+CREATE TABLE users (
+    id integer NOT NULL,
+    name character varying(255),
+    email character varying(255) NOT NULL,
+    password character varying(255) NOT NULL,
+    location_id integer
+);
+
+
+ALTER TABLE users OWNER TO tom;
+
+--
+-- Name: buyer_by_id; Type: VIEW; Schema: public; Owner: tom
+--
+
+CREATE VIEW buyer_by_id AS
+ SELECT u.name AS buyer_name,
+    u.id AS buyer_id,
+    u2.name AS seller_name,
+    u2.id AS seller_id,
+    i.name AS item_name,
+    i.description,
+    i.img_url,
+    h.haggle_price,
+    s.status,
+    l.city
+   FROM (((((haggles h
+     JOIN users u ON ((u.id = h.buyer_id)))
+     JOIN users u2 ON ((u2.id = h.seller_id)))
+     JOIN items i ON ((h.item_id = i.id)))
+     JOIN statuses s ON ((h.status_id = s.id)))
+     JOIN locations l ON ((l.id = u2.location_id)));
+
+
+ALTER TABLE buyer_by_id OWNER TO tom;
+
+--
 -- Name: categories; Type: TABLE; Schema: public; Owner: tom
 --
 
@@ -68,22 +164,6 @@ ALTER SEQUENCE categories_id_seq OWNED BY categories.id;
 
 
 --
--- Name: haggles; Type: TABLE; Schema: public; Owner: tom
---
-
-CREATE TABLE haggles (
-    id integer NOT NULL,
-    seller_id integer,
-    buyer_id integer,
-    haggle_price integer,
-    item_id integer,
-    status_id integer
-);
-
-
-ALTER TABLE haggles OWNER TO tom;
-
---
 -- Name: haggles_id_seq; Type: SEQUENCE; Schema: public; Owner: tom
 --
 
@@ -105,19 +185,22 @@ ALTER SEQUENCE haggles_id_seq OWNED BY haggles.id;
 
 
 --
--- Name: items; Type: TABLE; Schema: public; Owner: tom
+-- Name: items_by_location; Type: VIEW; Schema: public; Owner: tom
 --
 
-CREATE TABLE items (
-    id integer NOT NULL,
-    name character varying(255) NOT NULL,
-    initial_price integer NOT NULL,
-    description character varying(255) NOT NULL,
-    img_url character varying(255)
-);
+CREATE VIEW items_by_location AS
+ SELECT i.name,
+    i.description,
+    i.initial_price,
+    l.city,
+    u.name AS seller_name
+   FROM (((items i
+     JOIN haggles h ON ((i.id = h.item_id)))
+     JOIN users u ON ((u.id = h.seller_id)))
+     JOIN locations l ON ((l.id = u.location_id)));
 
 
-ALTER TABLE items OWNER TO tom;
+ALTER TABLE items_by_location OWNER TO tom;
 
 --
 -- Name: items_id_seq; Type: SEQUENCE; Schema: public; Owner: tom
@@ -187,19 +270,6 @@ CREATE TABLE knex_migrations_lock (
 ALTER TABLE knex_migrations_lock OWNER TO tom;
 
 --
--- Name: locations; Type: TABLE; Schema: public; Owner: tom
---
-
-CREATE TABLE locations (
-    id integer NOT NULL,
-    city character varying(255),
-    state_id integer
-);
-
-
-ALTER TABLE locations OWNER TO tom;
-
---
 -- Name: locations_id_seq; Type: SEQUENCE; Schema: public; Owner: tom
 --
 
@@ -219,6 +289,30 @@ ALTER TABLE locations_id_seq OWNER TO tom;
 
 ALTER SEQUENCE locations_id_seq OWNED BY locations.id;
 
+
+--
+-- Name: selling_by_id; Type: VIEW; Schema: public; Owner: tom
+--
+
+CREATE VIEW selling_by_id AS
+ SELECT u.name AS seller_name,
+    u.id AS seller_id,
+    u2.name AS buyer_name,
+    u2.id AS buyer_id,
+    i.name AS item_name,
+    i.description,
+    i.initial_price,
+    i.img_url,
+    h.haggle_price,
+    s.status
+   FROM ((((haggles h
+     JOIN users u ON ((h.seller_id = u.id)))
+     LEFT JOIN users u2 ON ((h.buyer_id = u2.id)))
+     JOIN items i ON ((h.item_id = i.id)))
+     JOIN statuses s ON ((h.status_id = s.id)));
+
+
+ALTER TABLE selling_by_id OWNER TO tom;
 
 --
 -- Name: states; Type: TABLE; Schema: public; Owner: tom
@@ -255,18 +349,6 @@ ALTER SEQUENCE states_id_seq OWNED BY states.id;
 
 
 --
--- Name: statuses; Type: TABLE; Schema: public; Owner: tom
---
-
-CREATE TABLE statuses (
-    id integer NOT NULL,
-    status character varying(255)
-);
-
-
-ALTER TABLE statuses OWNER TO tom;
-
---
 -- Name: statuses_id_seq; Type: SEQUENCE; Schema: public; Owner: tom
 --
 
@@ -286,20 +368,6 @@ ALTER TABLE statuses_id_seq OWNER TO tom;
 
 ALTER SEQUENCE statuses_id_seq OWNED BY statuses.id;
 
-
---
--- Name: users; Type: TABLE; Schema: public; Owner: tom
---
-
-CREATE TABLE users (
-    id integer NOT NULL,
-    name character varying(255),
-    email character varying(255) NOT NULL,
-    location_id integer
-);
-
-
-ALTER TABLE users OWNER TO tom;
 
 --
 -- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: tom
@@ -437,13 +505,13 @@ SELECT pg_catalog.setval('items_id_seq', 4, true);
 --
 
 COPY knex_migrations (id, name, batch, migration_time) FROM stdin;
-1	20170717132211_create_state_table.js	1	2017-07-17 14:14:46.799-07
-2	20170717132223_create_location_table.js	1	2017-07-17 14:14:46.812-07
-3	20170717132236_create_users_table.js	1	2017-07-17 14:14:46.823-07
-4	20170717132250_create_categories_table.js	1	2017-07-17 14:14:46.83-07
-5	20170717132302_create_items_table.js	1	2017-07-17 14:14:46.838-07
-6	20170717132314_create_statuses_table.js	1	2017-07-17 14:14:46.845-07
-7	20170717132328_create_haggles_table.js	1	2017-07-17 14:14:46.858-07
+1	20170717132211_create_state_table.js	1	2017-07-18 13:55:02.382-07
+2	20170717132223_create_location_table.js	1	2017-07-18 13:55:02.4-07
+3	20170717132236_create_users_table.js	1	2017-07-18 13:55:02.411-07
+4	20170717132250_create_categories_table.js	1	2017-07-18 13:55:02.419-07
+5	20170717132302_create_items_table.js	1	2017-07-18 13:55:02.427-07
+6	20170717132314_create_statuses_table.js	1	2017-07-18 13:55:02.434-07
+7	20170717132328_create_haggles_table.js	1	2017-07-18 13:55:02.447-07
 \.
 
 
@@ -572,10 +640,10 @@ SELECT pg_catalog.setval('statuses_id_seq', 3, true);
 -- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: tom
 --
 
-COPY users (id, name, email, location_id) FROM stdin;
-1	Race Carpenter	race@carpenter.com	1
-2	Vinni Otchkov	vinni@otchkov.com	4
-3	Tom Martin	tom@martin.com	6
+COPY users (id, name, email, password, location_id) FROM stdin;
+1	Race Carpenter	race@carpenter.com	password	1
+2	Vinni Otchkov	vinni@otchkov.com	password	4
+3	Tom Martin	tom@martin.com	password	6
 \.
 
 
