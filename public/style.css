@@ -158,9 +158,11 @@ table {
   background-color: white;
   font-size: 32px;
   font-family: serif;
+  text-align: center;
 }
 
 .userContainer {
   margin: 0px auto;
-  text-align: center;
+  width: 50%;
+  margin-top: 150px;
 }
