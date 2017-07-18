@@ -1,17 +1,14 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
-    <link href="/style.css" rel="stylesheet" type="text/css">
+<head>
 
+  <title>Haggle</title>
+</head>
 
-    <title>Haggle</title>
-  </head>
-  <body>
-    <nav class="navbar navbar-default" style="background-color:#8DAA9D; border:none;">
+<body>
+  <nav class="navbar navbar-default" style="background-color:#EA9E8D; border:none;">
+    <div class="overlay-container">
       <div class="container-fluid">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -20,26 +17,22 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" id = "title" href="/">Haggle</a>
+          <a class="navbar-brand" id="title" href="/">Home</a>
         </div>
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav">
-            <li><a href="/" id ="navStuff">Home <span class="sr-only">(current)</span></a></li>
-            <li><a href="#" id ="navStuff">Profile</a></li>
+            <li><a href="/user/:id" id="navStuff">Profile</a></li>
 
-
-
-<!-- DO NOT TOUCH THIS DROPDOWN LIST. IT KEEPS THE CONTACT LINK ON THE RIGHT SIDE -->
-              <ul class="dropdown-menu" role="menu">
-                <li><a href="#">Action</a></li>
-                <li><a href="#">Another action</a></li>
-                <li><a href="#">Something else here</a></li>
-                <li class="divider"></li>
-                <li><a href="#">Separated link</a></li>
-                <li class="divider"></li>
-                <li><a href="#">One more separated link</a></li>
-              </ul>
+            <ul class="dropdown-menu" role="menu">
+              <li><a href="#">Action</a></li>
+              <li><a href="#">Another action</a></li>
+              <li><a href="#">Something else here</a></li>
+              <li class="divider"></li>
+              <li><a href="#">Separated link</a></li>
+              <li class="divider"></li>
+              <li><a href="#">One more separated link</a></li>
+            </ul>
             </li>
           </ul>
           <form class="navbar-form navbar-left" role="search">
@@ -47,30 +40,35 @@
 
 
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="mailto:hagglerz@haggle.com">Contact Us</a></li>
+            <li><a id="navStuff" href="/user/new">Sign Up</a></li>
           </ul>
         </div>
-      </div>
-    </nav>
+  </nav>
+  </div>
+  </div>
 
-<br><br>
-    <center><img src="/images/logo.png" id ="logo"> </center>
+  <br><br>
+  <center><img src="/images/logo.png" id="logo"> </center>
 
-<br><br><br>
- <form class="searchForm" action="/items/:location_id" method="post">
-      <div class="form-group">
-      <label class="control-label" for="inputDefault"> What do you need?</label>
-      <center>   <input type="text" class="form-control" id="inputDefault">
+  <br><br>
+  <form class="searchForm" action="/items/:location_id" method="get">
+    <div class="form-group">
+      <label class="control-label" id="navLabel" for="inputDefault"> What do you need?</label>
+      <center> <input type="text" class="form-control animate" id="inputDefault" placeholder="Search">
     </div>
-  </center>
+    </center>
+
+    
 
     <center>
 
-  <a class="btn btn-primary btn-lg" style ="background-color:#8DAA9D;" >Get Haggling!</a>
-  </center>
-    </form>
+      <a href="/items/:location_id" class="btn btn-primary btn-lg" type="submit" id="haggleButton" style="background-color:#BD321F;">
+        <div id="haggleText">Get Haggling!</div>
+      </a>
+    </center>
+  </form>
 
-  </body>
+</body>
 
-  <footer class = "footer" style = "background-color:#8DAA9D">©Hagglerz 2017</footer>
+
 </html>
