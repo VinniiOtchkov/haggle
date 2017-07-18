@@ -20,7 +20,6 @@ router.get('/:id', function(req, res, next) {
     .select('img_url', 'item_name', 'haggle_price', 'seller_name', 'city', 'status')
     .where('buyer_id', req.params.id)
   ]).then(function(users) {
-    console.log('users', users);
     res.render('user', {
       selling: users[0],
       buying: users[1]
@@ -41,11 +40,7 @@ router.get('/:id/remove', function(req, res, next) {
 /* Creates New User. */
 router.post('/new', function(req, res, next) {
   knex('users')
-    .insert({
-      name: '${req.body.name}',
-      email: '${req.body.email}',
-      location_id: '${req.body.location_id}'
-    })
+    .insert(req.body)
     .then(function(req, res) {
       res.redirect('/');
     });
