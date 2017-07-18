@@ -6,11 +6,11 @@ var knex = require('../db/knex');
 /* Get new User Page. */
 router.get('/new', function(req, res, next) {
   var users = {};
-  knex('states')
+  knex('locations')
     .select()
-    .then(function(states) {
+    .then(function(locations) {
       res.render('user_signup', {
-        states
+        locations
       });
     })
 });
@@ -52,10 +52,14 @@ router.post('/new', function(req, res, next) {
   console.log(req.body);
   knex('users')
     .insert(req.body)
-    .then(function(users) {
-      res.render('user', {
-        users
-      });
+    .then(function() {
+      knex('users')
+        .select()
+        .max('id')
+        .then(function(users) {
+          console.log('params: ', users[0].max);
+          res.redirect('/user/' + users[0].max);
+        })
     });
 });
 

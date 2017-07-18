@@ -26,12 +26,11 @@
 </div>
 
 <div class="form-group">
-  <label class="control-label" for="inputDefault">Region:</label>
-  <br>
 
-  <select>
-    <% for(var i = 0; i < states.length; i++) { %>
-  <option value="<%=states[i].id%>" name="<%=states[i].id%>" placeholder="<%=states[i].abreviation%>"><%=states[i].abreviation%></option>
+  <label class="control-label" for="inputDefault">Region</label>
+  <select name="location_id">
+    <% for(var i = 0; i < locations.length; i++) { %>
+  <option value="<%=locations[i].id%>" name="<%=locations[i].id%>" placeholder="<%=locations[i].name%>"><%=locations[i].city%></option>
   <% } %>
 </select>
 </div>

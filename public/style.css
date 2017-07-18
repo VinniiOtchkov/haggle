@@ -197,3 +197,7 @@ table {
   width: 50%;
   margin-top: 150px;
 }
+
+select {
+  color: black;
+}
