@@ -3,6 +3,10 @@
 
 <head>
   <meta charset="utf-8">
+
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+
   <!-- Latest compiled and minified CSS -->
   <link rel='stylesheet' type='text/css' href='allresolution.css' />
 
@@ -13,9 +17,6 @@
   <link href="https://fonts.googleapis.com/css?family=Work+Sans" rel="stylesheet">
 
   <link href="/style.css" rel="stylesheet" type="text/css">
-
-  <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 
 
 </head>
@@ -96,8 +97,26 @@ $.fn.extend({
 
   });
 
+  $('body').css('display', 'none');
+
+  $('body').fadeIn(1100);
 
 
+  $('.link').click(function() {
+
+  event.preventDefault();
+
+  newLocation = this.href;
+
+  $('body').fadeOut(1100, newpage);
+
+  });
+
+  function newpage() {
+
+  window.location = newLocation;
+
+  }
 </script>
 
 </html>
