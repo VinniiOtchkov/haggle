@@ -44,6 +44,7 @@ body {
   width: 100%;
   background-color: #C6C7C4;
   background-size: cover;
+
 }
 
 select{
@@ -115,6 +116,8 @@ a:hover {
 #navStuff {
   color: black;
   font-family: 'Work Sans', sans-serif;
+  font-weight:bolder;
+
 
 }
 
@@ -154,6 +157,8 @@ font-weight: 300;
   font-weight: 200;
   font-family: 'Work Sans', sans-serif;
   opacity: 0;
+  font-weight:bolder;
+
 }
 
 .label{
@@ -172,6 +177,8 @@ font-weight: 300;
   background-image: url('/images/forest.jpg');
   opacity: 0.5;
   font-family: 'Work Sans', sans-serif;
+  font-weight:bolder;
+
 }
 
 table {
