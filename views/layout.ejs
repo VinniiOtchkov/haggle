@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <!-- Latest compiled and minified CSS -->
+  <link rel='stylesheet' type='text/css' href='allresolution.css' />
+
+  <link rel='stylesheet' type='text/css' media="all and (max-width:1024px)" href='lessthan1024.css' />
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Work+Sans" rel="stylesheet">
+
+  <link href="/style.css" rel="stylesheet" type="text/css">
+
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+  <%- body %>
+</body>
+
+<script type="text/javascript">
+
+$.fn.extend({
+    animateCss: function (animationName) {
+        var animationEnd = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
+        this.addClass('animated ' + animationName).one(animationEnd, function() {
+            $(this).removeClass('animated ' + animationName);
+        });
+        return this;
+    }
+});
+
+  $(function() {
+    $('#inputDefault').hover(function() {
+      $('#navLabel').css('opacity', '1');
+      $('#navLabel').animateCss('fadeInUp');
+
+    }, function() {
+
+      $('#navLabel').css({
+        transition:'all 0.5s ease-out',
+        opacity:'0'
+      });
+
+    })
+
+  });
+
+
+
+</script>
+
+<footer class="footer" style="background-color:#EA9E8D">©Haggle 2017</footer>
+
+</html>
