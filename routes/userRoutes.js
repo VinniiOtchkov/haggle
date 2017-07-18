@@ -50,12 +50,13 @@ router.get('/:id/remove', function(req, res, next) {
 /* Creates New User. */
 router.post('/new', function(req, res, next) {
   console.log(req.body);
-  knex('users')
-    .insert(req.body)
+  Promise.all([knex('users')
+      .insert(req.body),
+      knex('users').select().max('id')
+    ])
     .then(function(users) {
-      res.render('user', {
-        users
-      });
+      console.log('params: ', users[1][0].max);
+      res.redirect('/user/' + users[1][0].max);
     });
 });
 
