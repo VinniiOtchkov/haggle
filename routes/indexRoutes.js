@@ -4,6 +4,7 @@ var knex = require('../db/knex');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
+  console.log('req.user', req.isAuthenticated())
   res.render('index');
 });
 
