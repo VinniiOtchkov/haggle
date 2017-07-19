@@ -30,7 +30,7 @@ router.get('/login', function(req, res, next) {
 })
 
 /* GET USER page. */
-router.get('/:id', function(req, res, next) {
+router.get('/', function(req, res, next) {
   Promise.all([knex('selling_by_id')
     .join('users', 'users.id', 'selling_by_id.seller_id')
     .select('seller_name', 'img_url', 'item_name', 'haggle_price', 'buyer_name', 'status')
