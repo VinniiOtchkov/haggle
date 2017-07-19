@@ -39,7 +39,7 @@ router.get('/:id', function(req, res, next) {
 
 /* Deletes User. */
 router.get('/:id/remove', function(req, res, next) {
-  knex('')
+  knex('users')
     .del()
     .where('id', req.params.id)
     .then(function() {
@@ -66,7 +66,7 @@ router.post('/new', function(req, res, next) {
 
 /* Updates User */
 router.post('/:id/update', function(req, res) {
-  knex('')
+  knex('users')
     .update(req.body)
     .where('id', req.params.id)
     .then(function(users) {
