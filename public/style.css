@@ -202,10 +202,26 @@ table {
 .userContainer {
   margin: 0px auto;
   width: 50%;
-  margin-top: 150px;
+  margin-top: 10%;
+}
+
+
+.searchResults{
+
+}
+
+.searchResults img{
+  max-height: 200px;
+  max-width: 200px;
 }
 
 #signupText {
+  font-family: 'Work Sans', sans-serif;
+  margin-top: 6%;
+  margin-left: 20%;
+}
+
+#loginText {
   font-family: 'Work Sans', sans-serif;
   margin-top: 6%;
   margin-left: 20%;
