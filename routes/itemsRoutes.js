@@ -47,9 +47,14 @@ router.get('/addItem', function(req, res, next) {
 /* Add new Item. */
 router.post('/addItem', function(req, res, next) {
   knex('items')
-    .insert(req.body)
+    .insert({
+      name: req.body.name,
+      initial_price: req.body.initial_price,
+      description: req.body.description,
+      seller_id: req.user.id
+    })
     .then(() => {
-      res.redirect('/users/' + req.user.id);
+      res.redirect('/user/');
     });
 });
 
