@@ -29,8 +29,6 @@ router.get('/login', function(req, res, next) {
   res.render('user_login');
 })
 
-
-
 /* GET USER page. */
 router.get('/:id', function(req, res, next) {
   Promise.all([knex('selling_by_id')
@@ -42,13 +40,14 @@ router.get('/:id', function(req, res, next) {
     .select('img_url', 'item_name', 'haggle_price', 'seller_name', 'city', 'status')
     .where('buyer_id', req.user.id),
     knex('users')
-    .select()
-    .where('id', req.user.id)
+    .join('items', 'users.id', 'items.seller_id')
+    .select('users.name as user_name', 'items.*')
+    .where('users.id', req.user.id),
   ]).then(function(users) {
     res.render('user', {
       selling: users[0],
       buying: users[1],
-      users: users[2][0]
+      users: users[2]
     });
   });
 });

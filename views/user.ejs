@@ -2,8 +2,32 @@
 <div class="userContainer">
   <div class="userInfo table">
     <div class="title">
-    <%= users.name %>
+    <%= users[0].user_name %>
     </div>
+    <br>
+    <center><a href="/items/addItem"><button type="button" name="button">Sell a new Item</button></a></center>
+  </div>
+  <div class="sellingInfo">
+  <table class="table table-hover">
+  <div class="title">Posted Items for sale:</div>
+  <thead>
+    <tr>
+      <th></th>
+      <th>Image</th>
+      <th>Item</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% for(var i = 0; i < users.length; i++) { %>
+    <tr class="table-hover">
+      <td><img src="<%=users[i].img_url%>"><td>
+      <td><%=users[i].name%></td>
+      <td><%=users[i].description%></td>
+    </tr>
+    <% } %>
+  </tbody>
+  </table>
   </div>
   <div class="sellingInfo">
   <table class="table table-hover">
@@ -31,7 +55,6 @@
   </tbody>
   </table>
   </div>
-  <center><a href="/items/newItem"><button type="button" name="button">Sell a new Item</button></a></center><br>
   <div class="buyingInfo">
     <table class="table table-hover">
       <div class="title">Haggling:</div>
@@ -60,4 +83,5 @@
       </tbody>
     </table>
   </div>
+
 </div>

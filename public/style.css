@@ -208,10 +208,11 @@ table {
 
 .userContainer {
   margin: 0px auto;
-  width: 50%;
+  height: 700px;
+  width: 700px;
   margin-top: 10%;
+  overflow: scroll;
 }
-
 
 .searchResults{
 
