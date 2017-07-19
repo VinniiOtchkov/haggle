@@ -51,7 +51,6 @@ router.post('/addItem', function(req, res, next) {
     .then(() => {
       res.redirect('/users/' + req.user.id);
     });
-
 });
 
 
