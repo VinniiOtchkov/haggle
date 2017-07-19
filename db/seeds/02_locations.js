@@ -12,6 +12,9 @@ exports.seed = function(knex, Promise) {
         {city: 'Chandler', state_id: 3},
         {city: 'Queen Creek', state_id: 3},
         {city: 'Peoria', state_id: 3},
+        {city: 'Gilbert', state_id: 3},
+        {city: 'Ahwatukee', state_id: 3},
+        {city: 'Laveen', state_id: 3},
       ]);
     });
 };
