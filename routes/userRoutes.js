@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var knex = require('../db/knex');
+const bcrypt = require('bcrypt');
 
 /* checking if Authed */
 function checkAuthed(req, res, next) {
@@ -28,19 +29,20 @@ router.get('/login', function(req, res, next) {
   res.render('user_login');
 })
 
+
 /* GET USER page. */
 router.get('/:id', function(req, res, next) {
   Promise.all([knex('selling_by_id')
     .join('users', 'users.id', 'selling_by_id.seller_id')
     .select('seller_name', 'img_url', 'item_name', 'haggle_price', 'buyer_name', 'status')
-    .where('seller_id', req.params.id),
+    .where('seller_id', req.user.id),
     knex('buyer_by_id')
     .join('users', 'users.id', 'buyer_by_id.buyer_id')
     .select('img_url', 'item_name', 'haggle_price', 'seller_name', 'city', 'status')
-    .where('buyer_id', req.params.id),
+    .where('buyer_id', req.user.id),
     knex('users')
     .select()
-    .where('id', req.params.id)
+    .where('id', req.user.id)
   ]).then(function(users) {
     res.render('user', {
       selling: users[0],
@@ -66,14 +68,18 @@ router.post('/new', function(req, res, next) {
     bcrypt.hash(req.body.password, salt, function(err, hashedPassword) {
 
       knex('users')
-        .insert(req.body)
+        .insert({
+          name: req.body.name,
+          email: req.body.email,
+          password: hashedPassword,
+          location_id: req.body.location_id
+        })
         .then(function() {
           knex('users')
             .select()
             .max('id')
-            .then(function(users) {
-              console.log('params: ', users[0].max);
-              res.redirect('/user/' + users[0].max);
+            .then(function() {
+              res.redirect('/');
             })
         });
     });
@@ -84,9 +90,9 @@ router.post('/new', function(req, res, next) {
 router.post('/:id/update', function(req, res) {
   knex('users')
     .update(req.body)
-    .where('id', req.params.id)
+    .where('id', req.user.id)
     .then(function(users) {
-      res.redirect(`/${req.params.id}`)
+      res.redirect(`/${req.user.id}`)
     });
 });
 
