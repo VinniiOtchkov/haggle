@@ -45,7 +45,14 @@ router.post('/:id/update', function(req, res, next) {
     })
 })
 /* Add new Item. */
-router.post('/addItem', function(req, res, next) {})
+router.post('/addItem', function(req, res, next) {
+  knex('items')
+    .insert(req.body)
+    .then(() => {
+      res.redirect('/users/' + req.user.id);
+    });
+
+});
 
 
 module.exports = router;
