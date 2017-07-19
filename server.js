@@ -7,6 +7,7 @@ var logger = require('morgan');
 var knex = require('./db/knex');
 var expressLayouts = require('express-ejs-layouts');
 var bcrypt = require('bcrypt');
+var cookieParser = require('cookie-parser');
 
 
 var passport = require('passport');
@@ -28,7 +29,9 @@ app.use(logger('dev'));
 app.use(cors());
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({
+  extended: false
+}));
 app.use(express.static(__dirname + '/public'));
 app.use(expressLayouts);
 
