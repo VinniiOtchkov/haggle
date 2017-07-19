@@ -2,6 +2,14 @@ var express = require('express');
 var router = express.Router();
 var knex = require('../db/knex');
 
+/* checking if Authed */
+function checkAuthed(req, res, next) {
+  if (req.isAuthenticated()) {
+    next();
+  } else {
+    res.redirect('/login');
+  }
+}
 
 /* Get new User Page. */
 router.get('/new', function(req, res, next) {
@@ -54,20 +62,23 @@ router.get('/:id/remove', function(req, res, next) {
 
 /* Creates New User. */
 router.post('/new', function(req, res, next) {
-  console.log(req.body);
-  knex('users')
-    .insert(req.body)
-    .then(function() {
-      knex('users')
-        .select()
-        .max('id')
-        .then(function(users) {
-          console.log('params: ', users[0].max);
-          res.redirect('/user/' + users[0].max);
-        })
-    });
-});
+  bcrypt.genSalt(10, function(err, salt) {
+    bcrypt.hash(req.body.password, salt, function(err, hashedPassword) {
 
+      knex('users')
+        .insert(req.body)
+        .then(function() {
+          knex('users')
+            .select()
+            .max('id')
+            .then(function(users) {
+              console.log('params: ', users[0].max);
+              res.redirect('/user/' + users[0].max);
+            })
+        });
+    });
+  });
+});
 
 /* Updates User */
 router.post('/:id/update', function(req, res) {
