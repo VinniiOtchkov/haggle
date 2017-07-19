@@ -15,6 +15,7 @@ router.get('/new', function(req, res, next) {
     })
 });
 
+router.get
 /* GET USER page. */
 router.get('/:id', function(req, res, next) {
   Promise.all([knex('selling_by_id')
