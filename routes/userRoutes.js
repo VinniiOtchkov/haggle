@@ -30,6 +30,7 @@ router.get('/login', function(req, res, next) {
 })
 
 
+
 /* GET USER page. */
 router.get('/:id', function(req, res, next) {
   Promise.all([knex('selling_by_id')
@@ -61,6 +62,12 @@ router.get('/:id/remove', function(req, res, next) {
       res.redirect('/');
     });
 });
+
+/* logging out User. */
+router.get('/logout', function(req, res) {
+  req.logout();
+  res.redirect('/')
+})
 
 /* Creates New User. */
 router.post('/new', function(req, res, next) {
@@ -95,6 +102,7 @@ router.post('/:id/update', function(req, res) {
       res.redirect(`/${req.user.id}`)
     });
 });
+
 
 
 module.exports = router;
