@@ -15,7 +15,11 @@ router.get('/new', function(req, res, next) {
     })
 });
 
-router.get
+/* GET Login Page. */
+router.get('/login', function(req, res, next) {
+  res.render('user_login');
+})
+
 /* GET USER page. */
 router.get('/:id', function(req, res, next) {
   Promise.all([knex('selling_by_id')
