@@ -6,7 +6,8 @@
   </head>
   <body>
     <div class="wrapper">
-
+      <h1 id ="signupText">Signup</h1>
+      <br>
     <form class="newForm" action="/user/new" method="post">
 
 
@@ -15,10 +16,14 @@
   <input type="text" name ="name" class="form-control" id="inputDefault" placeholder="i.e. John Doe">
 </div>
 
+<br>
+
 <div class="form-group">
   <label class="control-label" for="inputDefault">Email:</label>
   <input type="text" name ="email" class="form-control" id="inputDefault" placeholder="i.e. example@example.com">
 </div>
+
+<br>
 
 <div class="form-group">
   <label class="control-label" for="inputDefault">Password:</label>
@@ -27,13 +32,16 @@
 
 <div class="form-group">
 
-  <label class="control-label" for="inputDefault">Region</label>
+  <label class="control-label" for="inputDefault">Region:</label>
+  <br>
   <select name="location_id">
     <% for(var i = 0; i < locations.length; i++) { %>
   <option value="<%=locations[i].id%>" name="<%=locations[i].id%>" placeholder="<%=locations[i].name%>"><%=locations[i].city%></option>
   <% } %>
 </select>
 </div>
+
+<br>
 
 <button class="btn btn-primary btn-lg" type="submit" id="haggleButton" style="background-color:#BD321F;">
   <div id="haggleText">Submit User</div>
