@@ -9,7 +9,7 @@ select u.name as seller_name, u.id as seller_id, u2.name as buyer_name, u2.id as
 --create view of all items being sold by location (using seller_id)
 drop view if exists items_by_location;
 create view items_by_location as
-select i.name, i.description, i.initial_price, l.city, u.name seller_name from items i join haggles h on i.id = h.item_id join users u on u.id = h.seller_id join locations l on l.id = u.location_id;
+select i.name, i.description, i.initial_price, l.city, l.id location_id, u.name seller_name from items i join haggles h on i.id = h.item_id join users u on u.id = h.seller_id join locations l on l.id = u.location_id;
 
 --List all items a user is buying based on user_id
 drop view if exists buyer_by_id;

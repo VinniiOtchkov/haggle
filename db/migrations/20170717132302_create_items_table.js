@@ -4,7 +4,9 @@ exports.up = function(knex, Promise) {
         table.string('name').notNullable();
         table.integer('initial_price').notNullable();
         table.string('description').notNullable();
+        table.boolean('sold').defaultTo(false);
         table.string('img_url');
+        table.integer('seller_id').references('id').inTable('users');
     })
 };
 
