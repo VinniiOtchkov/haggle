@@ -202,45 +202,46 @@ outline: none;
 }
 
 table {
-  background-color: black;
+  background-color: white;
   font-family: 'Work Sans', sans-serif;
   border: none;
   border-color: black;
-  color: white;
+  color: black;
 opacity: 0.9;
 border-radius: 8px;
+border: none;
+
 }
 
 table-hover{
-  background-color: black;
+  background-color: white;
   font-family: 'Work Sans', sans-serif;
   border: none;
   border-color: black;
 opacity: 0.9;
+color: black;
 }
 
 table-hover:hover{
-  background-color: black;
+  background-color: white;
 
 }
 
 .table>tbody>tr>td{
   border: none;
+  background-color: white;
+
 }
 
 
 td, th{
   border:none;
+  background-color: white;
+  border-radius: 8px;
+border: none;
 
 }
 
-td:hover{
-  background-color: black;
-}
-
-tr:hover{
-  background-color: black;
-}
 
 
 .title {
