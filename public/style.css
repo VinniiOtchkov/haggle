@@ -41,6 +41,7 @@ body {
   width: 100%;
   background-color: #C6C7C4;
   background-size: cover;
+  position: fixed;
 }
 
 select {
@@ -149,9 +150,6 @@ outline: none;
     outline: 0;
 }
 
-#haggleButton {
-  opacity: 0.9;
-}
 
 #haggleButton:hover {
   opacity: 0.85;
@@ -165,11 +163,12 @@ outline: none;
 
 #haggleButton {
   border: none;
+  opacity: 0.9;
+  font-weight: 300;
+
+
 }
 
-#haggleText {
-  font-weight: 300;
-}
 
 #navLabel {
   font-weight: 100;
@@ -196,21 +195,21 @@ outline: none;
 }
 
 table {
-  background-color: white;
 }
 
+
+
+
 .title {
-  background-color: white;
   font-size: 32px;
-  font-family: serif;
-  text-align: center;
+  color: black;
+  font-family: 'Work Sans', sans-serif;
+  width: 50%;
 }
 
 .userContainer {
   margin: 0px auto;
-  height: 700px;
-  width: 700px;
-  margin-top: 10%;
+  max-height: 690px;
   overflow: scroll;
 }
 
@@ -218,9 +217,54 @@ table {
 
 }
 
-.searchResults img{
-  max-height: 200px;
+#newItem{
+  opacity:0.9;
+  width:10%;
+  color: white;
+  font-family: 'Work Sans', sans-serif;
+  border: none;
+  margin-left: 80%;
+
+}
+
+#newItem:hover{
+  opacity: 0.85;
+
+}
+
+#newItem:active{
+  opacity: 0.8;
+
+}
+
+#userButtons:hover {
+  opacity: 0.85;
+
+}
+
+#userButtons:active {
+  opacity: 0.8;
+
+}
+
+#userButtons {
+  border: none;
+  opacity: 0.9;
+}
+
+#haggleText {
+  font-weight: 300;
+}
+
+#imagey{
+  max-height: 150px;
   max-width: 200px;
+}
+
+
+.searchResults img{
+  max-height: 10px;
+  max-width: 10px;
 }
 
 #signupText {
