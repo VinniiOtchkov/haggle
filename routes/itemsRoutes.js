@@ -47,7 +47,7 @@ router.post('/:id/update', function(req, res, next) {
     .update(req.body)
     .where('id', req.body.id)
     .then(function(items) {
-      res.redirect('/user/' + req.user.id)
+      res.redirect('/user' + req.user.id)
     })
 })
 /* Add new Item. */

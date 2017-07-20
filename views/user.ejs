@@ -2,26 +2,32 @@
 <div class="wrapper">
 <div class="userContainer">
   <div class="userInfo table">
-    <div class="title">
-    Haggle <%= users[0].user_name %>
+    <div id="titley">
+    <%= users[0].user_name %>
     </div>
     <br>
 
   </div>
   <div class="sellingInfo">
   <table class="table table-hover">
-  <div class="title">Posted Items for sale:</div>
+  <div class="title">Items for sale:</div>
   <thead>
     <tr>
       <th>Image</th>
+      <th></th>
       <th>Item</th>
       <th>Description</th>
+
     </tr>
   </thead>
   <tbody>
-
+    <a href="/items/addItem" id="newItem"type="submit">
+      +
+    </a>
     <% for(var i = 0; i < users.length; i++) { %>
+
     <tr class="table-hover">
+
       <td id = "imagePad"><img id = "imagey" src="https://multimedia.bbycastatic.ca/multimedia/products/1500x1500/102/10262/10262918.jpg"><td>
       <td><%=users[i].name%></td>
       <td><%=users[i].description%></td>
@@ -34,16 +40,14 @@
 
       <td>
 
-          <a href="/items/search" class="btn btn-primary btn-lg" type="submit" id="userButtons" style="background-color:#BD321F;">
+          <a href="items/remove/:id" class="btn btn-primary btn-lg" type="submit" id="userButtons" style="background-color:#BD321F;">
             <div id="haggleText">Delete</div>
           </a>
         </td>
     </tr>
 
-
-
-
     <% } %>
+
   </tbody>
   </table>
   </div>
@@ -70,9 +74,6 @@
       <td><%=selling[i].status%></td>
     </tr>
 
-    <a href="/items/addItem" id="newItem" class="btn btn-primary btn-lg" type="submit" style="background-color:#BCC78F;">
-      <div>New Item</div>
-    </a>
     <% } %>
 
   </tbody>

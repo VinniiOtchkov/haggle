@@ -106,6 +106,13 @@ a:hover {
   font-family: 'Work Sans', sans-serif;
 }
 
+#titley{
+  font-size: 42px;
+  color: black;
+  font-family: 'Work Sans', sans-serif;
+  text-align: center;
+}
+
 #title:hover {
   opacity: 0.9;
 }
@@ -195,9 +202,45 @@ outline: none;
 }
 
 table {
+  background-color: black;
+  font-family: 'Work Sans', sans-serif;
+  border: none;
+  border-color: black;
+  color: white;
+opacity: 0.9;
+border-radius: 8px;
+}
+
+table-hover{
+  background-color: black;
+  font-family: 'Work Sans', sans-serif;
+  border: none;
+  border-color: black;
+opacity: 0.9;
+}
+
+table-hover:hover{
+  background-color: black;
+
+}
+
+.table>tbody>tr>td{
+  border: none;
 }
 
 
+td, th{
+  border:none;
+
+}
+
+td:hover{
+  background-color: black;
+}
+
+tr:hover{
+  background-color: black;
+}
 
 
 .title {
@@ -209,6 +252,7 @@ table {
 
 .userContainer {
   margin: 0px auto;
+  max-width: 90%;
   max-height: 690px;
   overflow: scroll;
 }
@@ -218,22 +262,26 @@ table {
 }
 
 #newItem{
+  height: 0%;
+  width: 0%;
   opacity:0.9;
-  width:10%;
+font-size: 25px;
   color: white;
   font-family: 'Work Sans', sans-serif;
   border: none;
-  margin-left: 80%;
-
+float: right;
+border-radius: 10px;
+margin-right: 30px;
+text-decoration: none;
 }
 
 #newItem:hover{
-  opacity: 0.85;
+  opacity: 0.8;
 
 }
 
 #newItem:active{
-  opacity: 0.8;
+  opacity: 0.75;
 
 }
 
