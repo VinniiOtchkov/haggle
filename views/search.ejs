@@ -13,33 +13,33 @@
 
   <% } else { %>
 
-  <% for(var items of items) { %>
+  <% for(var i = 0; i < items.length; i++) { %>
     <div class="col-md-4">
       <div class="title">
 
         <div class="col-md-2" class="searchResults">
-          <img src="<%= items.img_url %>">
+          <img src="<%= items[i].img_url %>">
         </div>
         <div class="col-md-2" class="searchResults">
 
-            <%= items.name %>
+            <%= items[i].name %>
         </div>
         <div class="col-md-2" class="searchResults">
 
-            <%= items.description %>
+            <%= items[i].description %>
         </div>
         <div class="col-md-2" class="searchResults">
 
-            <%= items.initial_price %>
+            <%= items[i].initial_price %>
         </div>
         <div class="col-md-2" class="searchResults">
 
-            <%= items.seller_name %>
+            <%= items[i].seller_name %>
         </div>
 
       </div>
     </div>
-
+    <% } %>
     <% } %>
 </body>
 
