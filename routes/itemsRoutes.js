@@ -22,9 +22,11 @@ router.post('/search', function(req, res, next) {
     .andWhere('sold', false)
     .orderBy('city')
     .then(function(data) {
-      res.send(data);
-    })
-})
+      res.render('search', {
+        items: data
+      });
+    });
+});
 
 /* Get Add Item page */
 router.get('/addItem', function(req, res, next) {
@@ -33,14 +35,15 @@ router.get('/addItem', function(req, res, next) {
 })
 
 // /* Remove Item. */
-// router.get('/:id/remove', function(req, res, next) {
-//   knex('')
-//
-//     .then(function(items) {
-//
-//     })
-// })
-//
+router.get('/remove/:id', function(req, res, next) {
+  knex('items')
+  .update('closed', true)
+  .where('id', req.body.id)
+  .then(function() {
+    res.redirect('/user');
+    })
+})
+
 // /* Update Single Item. */
 router.post('/:id/update', function(req, res, next) {
   knex('items')
