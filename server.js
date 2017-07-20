@@ -15,6 +15,7 @@ var expressLayouts = require('express-ejs-layouts');
 var index = require('./routes/indexRoutes');
 var items = require('./routes/itemsRoutes');
 var user = require('./routes/userRoutes');
+var haggle = require('./routes/haggleRoutes');
 
 var app = express();
 
@@ -39,6 +40,7 @@ app.use(passport.session());
 app.use('/', index);
 app.use('/items', items);
 app.use('/user', user);
+app.use('/haggle', haggle);
 
 passport.use(new LocalStrategy(
   function(username, password, done) {

@@ -7,19 +7,23 @@ router.post('/', function(req, res, next) {
   knex('items_by_location')
     .select()
     .where('location_id', req.body.location_id)
+    .andWhere('sold', false)
     .then(data => {
       res.send(data);
     })
 });
 
-// /* GET Single Item. */
-// router.get('/:id', function(req, res, next) {
-//   knex('')
-//
-//     .then(function(items) {
-//
-//     })
-// })
+//Search for specific items by location
+router.post('/search/', function(req, res, next) {
+  knex('items_by_location')
+    .select()
+    .whereRaw(`lower(name) like lower('%${req.params.id}%')`)
+    .andWhere('location_id', req.body.location_id)
+    .andWhere('sold', false)
+    .then(function(data) {
+      res.send(data);
+    })
+})
 
 /* Get Add Item page */
 router.get('/addItem', function(req, res, next) {
@@ -37,13 +41,14 @@ router.get('/addItem', function(req, res, next) {
 // })
 //
 // /* Update Single Item. */
-// router.post('/:id/update', function(req, res, next) {
-//   knex('')
-//     .update()
-//     .then(function(items) {
-//
-//     })
-// })
+router.post('/:id/update', function(req, res, next) {
+  knex('items')
+    .update(req.body)
+    .where('id', req.body.id)
+    .then(function(items) {
+      res.redirect('/user/' + req.user.id)
+    })
+})
 /* Add new Item. */
 router.post('/addItem', function(req, res, next) {
   knex('items')
@@ -59,5 +64,16 @@ router.post('/addItem', function(req, res, next) {
     });
 });
 
+/* GET Single Item. */
+router.get('/:id', function (req, res, next) {
+  knex('items')
+    .select()
+    .where('id', req.params.id)
+    .then(function (items) {
+      res.render('', {
+        items: items
+      })
+    })
+})
 
 module.exports = router;
