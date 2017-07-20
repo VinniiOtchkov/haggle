@@ -18,8 +18,8 @@ router.post('/search/', function(req, res, next) {
   knex('items_by_location')
     .select()
     .whereRaw(`lower(name) like lower('%${req.params.id}%')`)
-    .andWhere('location_id', req.body.location_id)
     .andWhere('sold', false)
+    .orderBy('city')
     .then(function(data) {
       res.send(data);
     })
