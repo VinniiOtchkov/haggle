@@ -14,7 +14,7 @@ router.post('/', function(req, res, next) {
 });
 
 //Search for specific items by location
-router.post('/search/', function(req, res, next) {
+router.post('/search', function(req, res, next) {
   knex('items_by_location')
     .select()
     .whereRaw(`lower(name) like lower('%${req.params.id}%')`)

@@ -14,16 +14,16 @@
     <center><img src="/images/logo.png" id="logo"> </center>
 
     <br><br>
-    <form class="searchForm" action="/items/:location_id" method="get">
+    <form class="searchForm" action="/items/search" method="get">
       <div class="form-group">
         <label class="control-label" id="navLabel" for="inputDefault"> What are you looking for?</label>
-        <center> <input type="text" class="form-control animate" id="inputDefault" name = "search" placeholder="Search">
+        <center> <input type="text" class="form-control animate" id="inputDefault" name = "name" placeholder="Search">
       </div>
       </center>
 
 
       <center>
-        <a href="/items/:location_id" class="btn btn-primary btn-lg" type="submit" id="haggleButton" style="background-color:#BD321F;">
+        <a href="/items/search" class="btn btn-primary btn-lg" type="submit" id="haggleButton" style="background-color:#BD321F;">
           <div id="haggleText">Get Haggling!</div>
         </a>
       </center>
