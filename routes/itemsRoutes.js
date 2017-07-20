@@ -22,9 +22,12 @@ router.post('/search', function(req, res, next) {
     .andWhere('sold', false)
     .orderBy('city')
     .then(function(data) {
-      res.send(data);
-    })
-})
+      console.log('data', data)
+      res.render('search', {
+        items: data
+      });
+    });
+});
 
 /* Get Add Item page */
 router.get('/addItem', function(req, res, next) {
