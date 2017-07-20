@@ -51,6 +51,7 @@ router.post('/addItem', function(req, res, next) {
       name: req.body.name,
       initial_price: req.body.initial_price,
       description: req.body.description,
+      img_url: req.body.img_url,
       seller_id: req.user.id
     })
     .then(() => {
