@@ -1,30 +1,48 @@
 <%- contentFor('body') %>
+<div class="wrapper">
 <div class="userContainer">
   <div class="userInfo table">
     <div class="title">
     Haggle <%= users[0].user_name %>
     </div>
     <br>
-    <center><a href="/items/addItem"><button type="button" name="button">Sell a new Item</button></a></center>
+
   </div>
   <div class="sellingInfo">
   <table class="table table-hover">
   <div class="title">Posted Items for sale:</div>
   <thead>
     <tr>
-      <th></th>
       <th>Image</th>
       <th>Item</th>
       <th>Description</th>
     </tr>
   </thead>
   <tbody>
+
     <% for(var i = 0; i < users.length; i++) { %>
     <tr class="table-hover">
-      <td><img src="<%=users[i].img_url%>"><td>
+      <td id = "imagePad"><img id = "imagey" src="https://multimedia.bbycastatic.ca/multimedia/products/1500x1500/102/10262/10262918.jpg"><td>
       <td><%=users[i].name%></td>
       <td><%=users[i].description%></td>
+
+      <td>
+          <a href="/items/search" class="btn btn-primary btn-lg" type="submit" id="userButtons" style="background-color:#699837;">
+            <div id="haggleText">Edit</div>
+          </a>
+      </td>
+
+      <td>
+
+          <a href="/items/search" class="btn btn-primary btn-lg" type="submit" id="userButtons" style="background-color:#BD321F;">
+            <div id="haggleText">Delete</div>
+          </a>
+        </td>
     </tr>
+
+
+
+
     <% } %>
   </tbody>
   </table>
@@ -51,8 +69,14 @@
       <td><%=selling[i].buyer_name%></td>
       <td><%=selling[i].status%></td>
     </tr>
+
+    <a href="/items/addItem" id="newItem" class="btn btn-primary btn-lg" type="submit" style="background-color:#BCC78F;">
+      <div>New Item</div>
+    </a>
     <% } %>
+
   </tbody>
+
   </table>
   </div>
   <div class="buyingInfo">
@@ -83,5 +107,5 @@
       </tbody>
     </table>
   </div>
-
+</div>
 </div>
