@@ -15,11 +15,12 @@ router.post('/', function(req, res, next) {
 
 //Search for specific items by location
 router.post('/search', function(req, res, next) {
+
   knex('items_by_location')
     .select()
-    .whereRaw(`lower(name) like lower('%${req.params.id}%')`)
-    .andWhere('location_id', req.body.location_id)
+    .whereRaw(`lower(name) like lower('%${req.body.name}%')`)
     .andWhere('sold', false)
+    .orderBy('city')
     .then(function(data) {
       res.send(data);
     })
@@ -65,12 +66,12 @@ router.post('/addItem', function(req, res, next) {
 });
 
 /* GET Single Item. */
-router.get('/:id', function (req, res, next) {
+router.get('/:id', function(req, res, next) {
   knex('items')
     .select()
     .where('id', req.params.id)
-    .then(function (items) {
-      res.render('', {
+    .then(function(items) {
+      res.render('itemID', {
         items: items
       })
     })
