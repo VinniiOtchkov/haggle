@@ -65,12 +65,12 @@ router.post('/addItem', function(req, res, next) {
 });
 
 /* GET Single Item. */
-router.get('/:id', function (req, res, next) {
+router.get('/:id', function(req, res, next) {
   knex('items')
     .select()
     .where('id', req.params.id)
-    .then(function (items) {
-      res.render('', {
+    .then(function(items) {
+      res.render('itemID', {
         items: items
       })
     })
