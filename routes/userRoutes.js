@@ -31,25 +31,29 @@ router.get('/login', function(req, res, next) {
 
 /* GET USER page. */
 router.get('/', function(req, res, next) {
-  Promise.all([knex('selling_by_id')
-    .join('users', 'users.id', 'selling_by_id.seller_id')
-    .select('seller_name', 'img_url', 'item_name', 'haggle_price', 'buyer_name', 'status')
-    .where('seller_id', req.user.id),
-    knex('buyer_by_id')
-    .join('users', 'users.id', 'buyer_by_id.buyer_id')
-    .select('img_url', 'item_name', 'haggle_price', 'seller_name', 'city', 'status')
-    .where('buyer_id', req.user.id),
-    knex('users')
-    .join('items', 'users.id', 'items.seller_id')
-    .select('users.name as user_name', 'items.*')
-    .where('users.id', req.user.id),
-  ]).then(function(users) {
-    res.render('user', {
-      selling: users[0],
-      buying: users[1],
-      users: users[2]
-    });
-  });
+  if (req.isAuthenticated()) {
+    Promise.all([knex('selling_by_id')
+      .join('users', 'users.id', 'selling_by_id.seller_id')
+      .select('seller_name', 'img_url', 'item_name', 'haggle_price', 'buyer_name', 'status')
+      .where('seller_id', req.user.id),
+      knex('buyer_by_id')
+      .join('users', 'users.id', 'buyer_by_id.buyer_id')
+      .select('img_url', 'item_name', 'haggle_price', 'seller_name', 'city', 'status')
+      .where('buyer_id', req.user.id),
+      knex('users')
+      .join('items', 'users.id', 'items.seller_id')
+      .select('users.name as user_name', 'items.*')
+      .where('users.id', req.user.id),
+    ]).then(function(users) {
+      res.render('user', {
+        selling: users[0],
+        buying: users[1],
+        users: users[2]
+      })
+    })
+  } else {
+    res.redirect('/user/login');
+  }
 });
 
 /* Deletes User. */
